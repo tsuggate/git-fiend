@@ -1,0 +1,60 @@
+{
+  "name": "vlang",
+  "version": "0.0.1",
+  "description": "Language experiment.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "webpack --watch --colors --progress",
+    "make": "webpack --colors --progress",
+    "start": "electron output-code/main.js",
+    "debug": "nodemon --exec electron output-code/main.js --dev",
+    "pack": "build --dir",
+    "dist": "build"
+  },
+  "author": "Toby Suggate <sugto555@gmail.com>",
+  "license": "ISC",
+  "build": {  
+    "appId": "com.tsuggate.vlang",
+    "mac": {
+      "category": "Utility"
+    },
+    "files": [
+      "distr",
+      "node_modules",
+      "test-files",
+      "resources"
+    ]
+  },
+  "devDependencies": {
+    "commander": "^2.9.0",
+    "css-loader": "^0.28.0",
+    "electron-window-state": "^4.1.1",
+    "extract-text-webpack-plugin": "^2.1.0",
+    "fs-extra": "^2.1.2",
+    "js-beautify": "^1.6.12",
+    "json-loader": "^0.5.4",
+    "less": "^2.7.2",
+    "less-loader": "^4.0.3",
+    "nodemon": "^1.10.2",
+    "react": "^15.5.4",
+    "react-ace": "^4.2.1",
+    "react-dom": "^15.5.4",
+    "redux": "^3.6.0",
+    "style-loader": "^0.16.0",
+    "ts-loader": "^2.0.0",
+    "typescript": "^2.1.6",
+    "underscore": "^1.8.3",
+    "webpack": "^2.4.1",
+    "@types/commander": "^2.9.0",
+    "@types/escodegen": "0.0.6",
+    "@types/esprima": "^2.1.33",
+    "@types/fs-extra": "^2.1.0",
+    "@types/node": "^7.0.5",
+    "@types/react": "^15.0.23",
+    "@types/react-dom": "^15.5.0",
+    "@types/underscore": "^1.7.36",
+    "electron": "^1.6.2",
+    "electron-builder": "^17.5.0"
+  }
+}
