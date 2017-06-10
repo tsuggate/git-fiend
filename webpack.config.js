@@ -6,7 +6,7 @@ var webpack = require('webpack');
 module.exports = {
    entry: {
       "main": './src/main-process/main-window.ts',
-      "renderer": './src/ui/renderer.ts'
+      "renderer": './src/ui/renderer.tsx'
    },
    output: {
       path: path.join(__dirname, 'output-code/'),

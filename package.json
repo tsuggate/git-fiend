@@ -14,7 +14,7 @@
   },
   "author": "Toby Suggate <sugto555@gmail.com>",
   "license": "ISC",
-  "build": {  
+  "build": {
     "appId": "com.tsuggate.vlang",
     "mac": {
       "category": "Utility"
@@ -56,5 +56,9 @@
     "@types/underscore": "^1.7.36",
     "electron": "^1.6.2",
     "electron-builder": "^17.5.0"
+  },
+  "dependencies": {
+    "@types/react-redux": "^4.4.42",
+    "react-redux": "^5.0.5"
   }
 }
