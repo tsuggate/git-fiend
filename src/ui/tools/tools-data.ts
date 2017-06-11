@@ -1,9 +1,8 @@
+import {NodeId} from "../schema/schema";
 
-
-export type ToolId = 'set' | 'change';
 
 export interface ToolData {
-   id: ToolId;
+   id: NodeId;
 }
 
 export interface ToolsState {

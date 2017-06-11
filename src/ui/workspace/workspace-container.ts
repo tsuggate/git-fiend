@@ -9,7 +9,9 @@ const mapStateToProps = (state: State): WorkspaceProps => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-
+   placeVNode: () => {
+      console.log(ownProps);
+   }
 });
 
 export const WorkspaceContainer: ComponentClass<WorkspaceProps> = connect(

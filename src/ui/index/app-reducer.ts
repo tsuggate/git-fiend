@@ -6,5 +6,3 @@ export interface State {
    tools: ToolsState;
    workspace: WorkspaceProps;
 }
-
-// export type AppAction =

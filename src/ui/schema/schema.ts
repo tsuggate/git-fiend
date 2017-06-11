@@ -1,14 +1,13 @@
-import {ToolId} from "../tools/tools-data";
 
 
-export type NodeId = ToolId;
+export type NodeId = 'set' | 'change';
 
 export interface NodePosition {
    x: number;
    y: number;
 }
 
-export interface VNode {
+export interface VNodeI {
    id: NodeId;
    position: NodePosition;
 }
