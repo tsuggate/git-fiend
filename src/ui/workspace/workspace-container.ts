@@ -1,12 +1,19 @@
 import {Workspace, WorkspaceProps} from "./workspace";
 import {ComponentClass} from "react";
 import {connect} from "react-redux";
+import {State} from "../index/app-reducer";
 
 
-const mapStateToProps = (state: {}): WorkspaceProps => {
-   return state;
+const mapStateToProps = (state: State): WorkspaceProps => {
+   return state.workspace;
 };
 
+const mapDispatchToProps = (dispatch, ownProps) => ({
+
+});
+
 export const WorkspaceContainer: ComponentClass<WorkspaceProps> = connect(
-   mapStateToProps
+   mapStateToProps,
+   mapDispatchToProps
 )(Workspace);
+

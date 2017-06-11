@@ -13,7 +13,7 @@ interface AppProps {
 const App: SFC<AppProps> = (props: AppProps) => (
    <div className="App">
       <ToolsContainer tools={Any} />
-      <WorkspaceContainer />
+      <WorkspaceContainer nodes={Any} />
    </div>
 );
 
