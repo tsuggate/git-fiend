@@ -15,5 +15,15 @@ export const Tools: SFC<ToolsProps> = (props: ToolsProps) => (
 );
 
 function buildTools(tools: ToolData[]) {
-   return tools.map((t, i) => <div key={i} draggable>{t.id}</div>);
+   return tools.map((t, i) =>
+      <div key={i} id={`tool${i}`} onDragStart={onDragStart} draggable>
+         {t.id}
+      </div>
+   );
+}
+
+function onDragStart(e: React.DragEvent<HTMLDivElement>) {
+   const target = e.target as HTMLDivElement;
+
+   e.dataTransfer.setData('targetId', target.id);
 }
