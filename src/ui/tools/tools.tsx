@@ -1,22 +1,19 @@
 import * as React from "react";
-import {ComponentClass, SFC} from "react";
-import {ToolsState} from "./tools-data";
-import {connect} from "react-redux";
+import {SFC} from "react";
+import {ToolData} from "./tools-data";
+import './tools.less';
 
-type ToolsProps = ToolsState;
 
-const Tools: SFC<ToolsProps> = (props: ToolsProps) => (
-   <div>
-      <p>{JSON.stringify(props)}</p>
+export interface ToolsProps {
+   tools: ToolData[];
+}
+
+export const Tools: SFC<ToolsProps> = (props: ToolsProps) => (
+   <div className="Tools">
+      <div className="tool">{buildTools(props.tools)}</div>
    </div>
 );
 
-const mapStateToProps = (state: ToolsProps): ToolsState => {
-   console.log(state);
-
-   return state;
-};
-
-export const ToolsContainer: ComponentClass<ToolsProps> = connect(
-   mapStateToProps, {}
-)(Tools);
+function buildTools(tools: ToolData[]) {
+   return tools.map((t, i) => <div key={i} draggable>{t.id}</div>);
+}
