@@ -14,7 +14,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
    }
 });
 
-export const WorkspaceContainer: ComponentClass<WorkspaceProps> = connect(
+export const WorkspaceContainer = connect(
    mapStateToProps,
    mapDispatchToProps
 )(Workspace);

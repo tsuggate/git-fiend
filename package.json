@@ -43,7 +43,7 @@
     "redux": "^3.6.0",
     "style-loader": "^0.16.0",
     "ts-loader": "^2.0.0",
-    "typescript": "^2.1.6",
+    "typescript": "2.3.4",
     "underscore": "^1.8.3",
     "webpack": "^2.4.1",
     "@types/commander": "^2.9.0",
@@ -58,7 +58,7 @@
     "electron-builder": "^17.5.0"
   },
   "dependencies": {
-    "@types/react-redux": "^4.4.42",
+    "@types/react-redux": "4.4.40",
     "react-redux": "^5.0.5"
   }
 }

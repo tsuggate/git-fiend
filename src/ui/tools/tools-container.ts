@@ -1,11 +1,9 @@
-import {connect} from "react-redux";
-import {ToolsState} from "./tools-data";
-import {Tools, ToolsProps} from "./tools";
-import {ComponentClass} from "react";
-import {State} from "../index/app-reducer";
+import {connect} from 'react-redux';
+import {Tools, ToolsProps} from './tools';
+import {State} from '../index/app-reducer';
 
 
-const mapStateToProps = (state: State): ToolsState => {
+const mapStateToProps = (state: State): ToolsProps => {
    return state.tools;
 };
 
@@ -13,7 +11,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 
 });
 
-export const ToolsContainer: ComponentClass<ToolsProps> = connect(
+export const ToolsContainer = connect(
    mapStateToProps,
    mapDispatchToProps
 )(Tools);
