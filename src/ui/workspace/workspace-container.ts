@@ -1,5 +1,4 @@
 import {Workspace, WorkspaceProps} from "./workspace";
-import {ComponentClass} from "react";
 import {connect} from "react-redux";
 import {State} from "../index/app-reducer";
 
