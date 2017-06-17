@@ -1,29 +1,50 @@
+import "./tools.less";
 import * as React from "react";
-import {SFC} from "react";
 import {ToolData} from "./tools-data";
-import './tools.less';
+import {State} from "../index/app-reducer";
+import {connect, Dispatch} from "react-redux";
+import {ToolsAction} from "./tools-reducer";
 
 
 export interface ToolsProps {
    tools: ToolData[];
 }
 
-export const Tools: SFC<ToolsProps> = (props: ToolsProps) => (
-   <div className="Tools">
-      <div className="tool">{buildTools(props.tools)}</div>
-   </div>
-);
+export class Tools extends React.PureComponent<ToolsProps, {}> {
+   render() {
+      return (
+         <div className="Tools">
+            <div className="tool">{this.buildTools()}</div>
+         </div>
+      );
+   }
 
-function buildTools(tools: ToolData[]) {
-   return tools.map((t, i) =>
-      <div key={i} id={`tool${i}`} onDragStart={onDragStart} draggable>
-         {t.id}
-      </div>
-   );
+   buildTools = () => {
+      const {tools} = this.props;
+
+      return tools.map((t, i) =>
+         <div key={i} id={`tool${i}`} onDragStart={this.onDragStart} draggable>
+            {t.id}
+         </div>
+      );
+   };
+
+   onDragStart = (e: React.DragEvent<HTMLDivElement>) => {
+      const target = e.target as HTMLDivElement;
+
+      e.dataTransfer.setData('targetId', target.id);
+   };
 }
 
-function onDragStart(e: React.DragEvent<HTMLDivElement>) {
-   const target = e.target as HTMLDivElement;
+const mapStateToProps = (state: State): ToolsProps => {
+   return state.tools;
+};
 
-   e.dataTransfer.setData('targetId', target.id);
-}
+const mapDispatchToProps = (dispatch: Dispatch<ToolsAction>, ownProps: {}) => ({
+
+});
+
+export const ToolsContainer = connect(
+   mapStateToProps,
+   mapDispatchToProps
+)(Tools);

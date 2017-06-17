@@ -1,8 +1,9 @@
 import {app, BrowserWindow} from "electron";
 import * as path from "path";
-import * as windowState from "electron-window-state";
 import {devMode} from "./args";
 
+// import * as windowState from "electron-window-state";
+const windowState = require('electron-window-state');
 
 let mainWindow: Electron.BrowserWindow | null = null;
 

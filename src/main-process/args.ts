@@ -11,7 +11,8 @@ program
 
 export const devMode = !!program['dev'];
 
-global['devMode'] = devMode;
+const g = global as any;
+g['devMode'] = devMode;
 
 // Commander expects `args.length` to be at least 2 (node.exe followed
 // by the JavaScript file), but electron can launch apps without any

@@ -1,8 +1,8 @@
+import "./app.less";
 import * as React from "react";
 import {SFC} from "react";
-import {ToolsContainer} from "../tools/tools-container";
-import {WorkspaceContainer} from "../workspace/workspace-container";
-import "./app.less";
+import {WorkspaceContainer} from "../workspace/workspace";
+import {ToolsContainer} from "../tools/tools";
 
 
 interface AppProps {

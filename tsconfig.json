@@ -5,6 +5,7 @@
     "sourceMap": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitReturns": true,
+    "noImplicitAny": true,
     "strictNullChecks": true,
     "jsx": "react",
     "lib": [
