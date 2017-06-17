@@ -1,5 +1,5 @@
 import {WorkspaceProps} from "./workspace";
-import {NodeId, NodePosition} from "../schema/schema";
+import {NodeId, NodePosition, VNodeI} from "../schema/schema";
 
 
 export type WorkspaceAction = Drop;
@@ -21,8 +21,15 @@ const initialState: WorkspaceProps = {
 export function workspaceReducer(s: WorkspaceProps = initialState, action: WorkspaceAction): WorkspaceProps {
    switch (action.type) {
       case 'DROP':
-         return {...s, nodes: [...s.nodes, {id: action.id, position: action.position}]};
+         return {...s, nodes: [...s.nodes, makeNode(action)]};
       default:
          return s;
    }
+}
+
+function makeNode(action: Drop): VNodeI {
+   return {
+      id: action.id,
+      position: action.position
+   };
 }
