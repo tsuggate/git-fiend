@@ -4,6 +4,7 @@ import {ToolData} from "./tools-data";
 import {State} from "../index/app-reducer";
 import {connect, Dispatch} from "react-redux";
 import {ToolsAction} from "./tools-reducer";
+import {NodeId} from "../schema/schema";
 
 
 export interface ToolsProps {
@@ -32,7 +33,13 @@ export class Tools extends React.PureComponent<ToolsProps, {}> {
    onDragStart = (e: React.DragEvent<HTMLDivElement>) => {
       const target = e.target as HTMLDivElement;
 
-      e.dataTransfer.setData('targetId', target.id);
+      const toolData: ToolData = {
+         id: target.innerText as NodeId
+      };
+
+      console.log(target.innerText);
+
+      e.dataTransfer.setData('toolData', JSON.stringify(toolData));
    };
 }
 

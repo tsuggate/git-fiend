@@ -4,11 +4,12 @@ import {NodePosition, VNodeI} from "../schema/schema";
 import {VNode} from "../vnode/vnode";
 import {State} from "../index/app-reducer";
 import {connect} from "react-redux";
+import {ToolData} from "../tools/tools-data";
 
 
 export interface WorkspaceProps {
    nodes: VNodeI[];
-   placeVNode: (id: any, position: NodePosition) => void
+   placeVNode: (id: string, position: NodePosition) => void
 }
 
 export class Workspace extends React.PureComponent<WorkspaceProps, {}> {
@@ -28,10 +29,10 @@ export class Workspace extends React.PureComponent<WorkspaceProps, {}> {
    onDrop = (e: React.DragEvent<HTMLDivElement>) => {
       e.preventDefault();
 
-      const id = e.dataTransfer.getData('targetId');
+      const toolData = JSON.parse(e.dataTransfer.getData('toolData')) as ToolData;
       const position = {x: e.clientX, y: e.clientY};
 
-      this.props.placeVNode(id, position);
+      this.props.placeVNode(toolData.id, position);
    };
 }
 
