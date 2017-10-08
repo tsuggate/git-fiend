@@ -58,7 +58,9 @@
     "electron-builder": "^17.5.0"
   },
   "dependencies": {
+    "@types/nodegit": "^0.18.3",
     "@types/react-redux": "4.4.40",
+    "nodegit": "^0.20.2",
     "react-redux": "^5.0.5"
   }
 }
