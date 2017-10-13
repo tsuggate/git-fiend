@@ -1,7 +1,6 @@
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
-var path = require('path');
-var webpack = require('webpack');
-
+import * as path from 'path';
+import * as webpack from 'webpack';
+import * as ExtractTextPlugin from 'extract-text-webpack-plugin';
 
 module.exports = {
    entry: {
@@ -55,19 +54,19 @@ module.exports = {
             loader: "raw-loader"
          },
          {
-            test: /\.svg(?:[\?#]|$)/,
+            test: /\.svg(?:[?#]|$)/,
             loader: "url-loader",
             options: { limit: 10000 }
          }, {
-            test: /\.png(?:[\?#]|$)/,
+            test: /\.png(?:[?#]|$)/,
             loader: "url-loader",
             options: { limit: 10000 }
          }, {
-            test: /\.gif(?:[\?#]|$)/,
+            test: /\.gif(?:[?#]|$)/,
             loader: "url-loader",
             options: { limit: 10000 }
          }, {
-            test: /\.jpg(?:[\?#]|$)/,
+            test: /\.jpg(?:[?#]|$)/,
             loader: "url-loader",
             options: { limit: 10000 }
          }
@@ -87,17 +86,11 @@ module.exports = {
 };
 
 function getPlugins() {
-   const plugins = [
+   return [
       new webpack.DefinePlugin({
          "global.GENTLY": false,
          'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
       }),
-      new ExtractTextPlugin({ filename: '[name].css' }),
+      new ExtractTextPlugin({filename: '[name].css'}),
    ];
-
-   // if (process.env.NODE_ENV === 'production') {
-   //    plugins.push(new webpack.optimize.UglifyJsPlugin());
-   // }
-
-   return plugins;
 }
