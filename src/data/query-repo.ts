@@ -22,13 +22,11 @@ export function walkHistory(commit: Commit) {
    return new Promise(resolve => {
       const history = commit.history();
 
-      // History emits "commit" event for each commit in the branch's history
-      history.on("commit", function(commit: any) {
-         console.log("commit " + commit.sha());
-         console.log("Author:", commit.author().name() +
-            " <" + commit.author().email() + ">");
-         console.log("Date:", commit.date());
-         console.log("\n    " + commit.message());
+      history.on('commit', function(commit: any) {
+         console.log(`commit ${commit.sha()}`);
+         console.log(`Author:`, `${commit.author().name()} <${commit.author().email()}>`);
+         console.log(`Date:`, commit.date());
+         console.log(`\n   ${commit.message()}`);
       });
 
       history.on('end', () => {
@@ -40,6 +38,5 @@ export function walkHistory(commit: Commit) {
       });
 
       (history as any).start();
-   })
-
+   });
 }
