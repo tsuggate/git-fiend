@@ -5,7 +5,7 @@ var webpack = require('webpack');
 
 module.exports = {
    entry: {
-      "main": './src/main-process/main-window.ts',
+      "main": './src/main-process/main.ts',
       "renderer": './src/ui/renderer.tsx'
    },
    output: {

@@ -8,6 +8,22 @@ const windowState = require('electron-window-state');
 let mainWindow: Electron.BrowserWindow | null = null;
 
 
+export function runCreateWindow(): void {
+   app.on('ready', createWindow);
+
+   app.on('window-all-closed', () => {
+      if (process.platform !== 'darwin') {
+         app.quit();
+      }
+   });
+
+   app.on('activate', () => {
+      if (mainWindow === null) {
+         createWindow();
+      }
+   });
+}
+
 function createWindow(): void {
    const mainWindowState = windowState({
       defaultWidth: 1200,
@@ -35,17 +51,3 @@ function createWindow(): void {
 
    mainWindowState.manage(mainWindow);
 }
-
-app.on('ready', createWindow);
-
-app.on('window-all-closed', () => {
-   if (process.platform !== 'darwin') {
-      app.quit();
-   }
-});
-
-app.on('activate', () => {
-   if (mainWindow === null) {
-      createWindow();
-   }
-});

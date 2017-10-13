@@ -15,7 +15,7 @@
   "author": "Toby Suggate <sugto555@gmail.com>",
   "license": "ISC",
   "build": {
-    "appId": "com.tsuggate.vlang",
+    "appId": "com.tsuggate.gitfiend",
     "mac": {
       "category": "Utility"
     },
