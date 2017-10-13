@@ -1,5 +1,5 @@
 import * as Git from 'nodegit';
-import {Commit, Repository, Revwalk} from 'nodegit';
+import {Commit, ConvenientPatch, Diff, DiffFile, Repository, Revwalk, TreeEntry} from 'nodegit';
 import * as path from 'path';
 import * as moment from 'moment';
 
@@ -9,8 +9,15 @@ const pathToRepo = path.resolve(__dirname, '..');
 export async function printQuery() {
    const repo: Repository = await Git.Repository.open(pathToRepo);
 
-   const commits = await getCommits(repo, 3);
-   commits.forEach(logCommit);
+   // const commits = await getCommits(repo, 3);
+   // commits.forEach(logCommit);
+
+   const commit = await repo.getHeadCommit();
+   const diffFiles = await getChangedFilesForCommit(commit);
+
+   diffFiles.forEach(d => {
+      console.log(d.path());
+   });
 }
 
 export async function getCommits(repo: Repository, num: number): Promise<Commit[]> {
@@ -36,4 +43,24 @@ export async function loadCommits(num: number): Promise<Commit[]> {
    const repo: Repository = await Git.Repository.open(pathToRepo);
 
    return await getCommits(repo, num);
+}
+
+// This is just a quick approx. Has issues.
+export async function getChangedFilesForCommit(commit: Commit) {
+   const diffs: Diff[] = await commit.getDiff(() => {});
+
+   let diffFiles: DiffFile[] = [];
+
+   for (const d of diffs) {
+      const patches: ConvenientPatch[] = await d.patches();
+
+      patches.forEach(p => {
+         const diffFile: DiffFile = p.newFile();
+
+         // console.log(diffFile.path());
+         diffFiles.push(diffFile);
+      });
+   }
+
+   return diffFiles;
 }
