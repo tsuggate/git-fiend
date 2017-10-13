@@ -1,21 +1,19 @@
 import {MapViewState} from "./map-view-data";
+import {MapViewAction} from './map-view-actions';
 
 
-export type MapViewAction = any;
+// export type MapViewAction = any;
 
 
 const initialState: MapViewState = {
-   commits: [{
-      hash: '55advc',
-      author: 'Toby',
-      date: 1507435040154,
-      message: 'more code',
-      branch: 'dev2'
-   }]
+   commits: []
 };
 
 export function mapViewReducer(s: MapViewState = initialState, action: MapViewAction): MapViewState {
    switch (action.type) {
+      case 'LOAD_COMMITS':
+         console.log('LOAD_COMMITS');
+         return {...s, commits: action.commits};
       default:
          return s;
    }

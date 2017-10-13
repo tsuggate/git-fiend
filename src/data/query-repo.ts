@@ -31,3 +31,9 @@ function logCommit(commit: Commit): void {
    console.log('Time:  ', date);
    console.log(`\n   ${commit.message()}`);
 }
+
+export async function loadCommits(num: number): Promise<Commit[]> {
+   const repo: Repository = await Git.Repository.open(pathToRepo);
+
+   return await getCommits(repo, num);
+}
