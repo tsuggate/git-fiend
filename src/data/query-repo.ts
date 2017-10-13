@@ -1,5 +1,5 @@
 import * as Git from 'nodegit';
-import {Commit, Repository} from 'nodegit';
+import {Commit, Repository, Revwalk} from 'nodegit';
 import * as path from 'path';
 import * as moment from 'moment';
 
@@ -9,34 +9,25 @@ const pathToRepo = path.resolve(__dirname, '..');
 export async function printQuery() {
    const repo: Repository = await Git.Repository.open(pathToRepo);
 
-   const commit: Commit = await repo.getMasterCommit();
-
-   const date = moment(new Date(commit.date())).fromNow();
-
-   console.log(commit.message(), date);
-
-   await walkHistory(commit);
+   const commits = await getCommits(repo, 3);
+   commits.forEach(logCommit);
 }
 
-export function walkHistory(commit: Commit) {
-   return new Promise(resolve => {
-      const history = commit.history();
+export async function getCommits(repo: Repository, num: number): Promise<Commit[]> {
+   const commit = await repo.getHeadCommit();
+   const walker: Revwalk = repo.createRevWalk(commit.id());
 
-      history.on('commit', function(commit: any) {
-         console.log(`commit ${commit.sha()}`);
-         console.log(`Author:`, `${commit.author().name()} <${commit.author().email()}>`);
-         console.log(`Date:`, commit.date());
-         console.log(`\n   ${commit.message()}`);
-      });
+   walker.sorting(Git.Revwalk.SORT.TIME);
+   walker.push(commit.id());
+   return await walker.getCommits(num);
+}
 
-      history.on('end', () => {
-         resolve();
-      });
+function logCommit(commit: Commit): void {
+   const author = commit.author() as any;
+   const date = moment(new Date(commit.date())).fromNow();
 
-      history.on('error', () => {
-         resolve();
-      });
-
-      (history as any).start();
-   });
+   console.log(`Commit: ${commit.sha()}`);
+   console.log(`Author:`, `${author.name()} <${author.email()}>`);
+   console.log('Time:  ', date);
+   console.log(`\n   ${commit.message()}`);
 }
