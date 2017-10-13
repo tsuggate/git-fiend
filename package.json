@@ -61,8 +61,10 @@
   },
   "dependencies": {
     "@types/extract-text-webpack-plugin": "^3.0.0",
+    "@types/moment": "^2.13.0",
     "@types/nodegit": "^0.18.3",
     "@types/react-redux": "4.4.40",
+    "moment": "^2.19.1",
     "nodegit": "^0.20.2",
     "react-redux": "^5.0.5"
   }
