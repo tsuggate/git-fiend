@@ -74,6 +74,7 @@ module.exports = {
       noParse: /node_modules\/json-schema\/lib\/validate\.js/
    },
    plugins: getPlugins(),
+   externals: getExternals(),
    node: {
       console: false,
       global: false,
@@ -93,4 +94,18 @@ function getPlugins() {
       }),
       new ExtractTextPlugin({filename: '[name].css'}),
    ];
+}
+
+export function getExternals() {
+   const modules = [
+      'nodegit'
+   ];
+
+   let externals: any = {};
+
+   modules.forEach(m => {
+      externals[m] = `require("${m}")`;
+   });
+
+   return externals;
 }
