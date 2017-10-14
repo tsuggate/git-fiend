@@ -2,6 +2,7 @@ import * as Git from 'nodegit';
 import {Commit, ConvenientPatch, Diff, DiffFile, Repository, Revwalk, TreeEntry} from 'nodegit';
 import * as path from 'path';
 import * as moment from 'moment';
+import {ModifiedFilesProps} from "../ui/modified-files/modified-files-reducer";
 
 
 const pathToRepo = path.resolve(__dirname, '..');
@@ -9,15 +10,12 @@ const pathToRepo = path.resolve(__dirname, '..');
 export async function printQuery() {
    const repo: Repository = await Git.Repository.open(pathToRepo);
 
-   // const commits = await getCommits(repo, 3);
-   // commits.forEach(logCommit);
+   const commits = await getCommits(repo, 3);
+   commits.forEach(logCommit);
+}
 
-   const commit = await repo.getHeadCommit();
-   const diffFiles = await getChangedFilesForCommit(commit);
-
-   diffFiles.forEach(d => {
-      console.log(d.path());
-   });
+export async function openRepo(): Promise<Repository> {
+   return await Git.Repository.open(pathToRepo);
 }
 
 export async function getCommits(repo: Repository, num: number): Promise<Commit[]> {
@@ -39,10 +37,14 @@ function logCommit(commit: Commit): void {
    console.log(`\n   ${commit.message()}`);
 }
 
-export async function loadCommits(num: number): Promise<Commit[]> {
-   const repo: Repository = await Git.Repository.open(pathToRepo);
+export async function loadModifiedFiles(repo: Repository): Promise<ModifiedFilesProps> {
+   const commit = await repo.getHeadCommit();
+   const diffFiles = await getChangedFilesForCommit(commit);
 
-   return await getCommits(repo, num);
+   return {
+      commitId: commit.id(),
+      diffFiles
+   };
 }
 
 // This is just a quick approx. Has issues.
@@ -57,7 +59,6 @@ export async function getChangedFilesForCommit(commit: Commit) {
       patches.forEach(p => {
          const diffFile: DiffFile = p.newFile();
 
-         // console.log(diffFile.path());
          diffFiles.push(diffFile);
       });
    }

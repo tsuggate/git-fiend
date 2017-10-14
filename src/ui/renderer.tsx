@@ -3,23 +3,22 @@ import * as React from "react";
 import {render} from "react-dom";
 import {combineReducers, createStore} from "redux";
 import {Provider} from "react-redux";
-import {toolsReducer} from "./tools/tools-reducer";
 import App from "./index/app";
-import {State, Store} from "./index/app-reducer";
-import {workspaceReducer} from "./workspace/workspace-reducer";
+import {Store} from "./index/app-reducer";
 import {mapViewReducer} from "./map-view/map-view-reducer";
-import {loadCommits} from '../data/query-repo';
+import {getCommits, loadModifiedFiles, openRepo} from '../data/query-repo';
+import {modifiedFilesReducer} from "./modified-files/modified-files-reducer";
 
 
 const indexReducer = combineReducers<Store>({
-   mapView: mapViewReducer
+   mapView: mapViewReducer,
+   modifiedFiles: modifiedFilesReducer
 });
 
 const store = createStore(indexReducer);
 
-loadCommits(10).then(commits => {
-   store.dispatch({type: 'LOAD_COMMITS', commits});
-});
+
+loadInitialState().catch(e => console.log(e));
 
 render(
    <Provider store={store}>
@@ -27,3 +26,15 @@ render(
    </Provider>,
    document.getElementById('root')
 );
+
+
+async function loadInitialState() {
+   const repo = await openRepo();
+   const commits = await getCommits(repo, 10);
+
+   store.dispatch({type: 'LOAD_COMMITS', commits});
+
+   const modifiedFiles = await loadModifiedFiles(repo);
+
+   store.dispatch({type: 'LOAD_MODIFIED_FILES', ...modifiedFiles});
+}
