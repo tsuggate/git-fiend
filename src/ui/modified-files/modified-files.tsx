@@ -3,12 +3,13 @@ import {ModifiedFilesProps} from "./modified-files-reducer";
 import {Store} from "../index/app-reducer";
 import {connect, Dispatch} from "react-redux";
 import {ModifiedFilesAction} from "./modified-files-actions";
-import {DiffFile} from "nodegit";
+import {ConvenientPatch} from "nodegit";
+import './modified-files.less';
 
 
 export class ModifiedFiles extends React.PureComponent<ModifiedFilesProps, {}> {
    render() {
-      const files = this.props.diffFiles.map(createModifiedFileElement);
+      const files = this.props.patches.map(createModifiedFileElement);
 
       return (
          <div className="ModifiedFiles">
@@ -18,10 +19,25 @@ export class ModifiedFiles extends React.PureComponent<ModifiedFilesProps, {}> {
    }
 }
 
-function createModifiedFileElement(diffFile: DiffFile, key: number) {
+function getPatchTypeString(patch: ConvenientPatch): string {
+   if (patch.isAdded()) {
+      return 'added';
+   }
+   else if (patch.isDeleted()) {
+      return 'deleted';
+   }
+   else if (patch.isModified()) {
+      return 'modified';
+   }
+   else {
+      return '???';
+   }
+}
+
+function createModifiedFileElement(patch: ConvenientPatch, key: number) {
    return (
       <div className="diffFile" key={key}>
-         {diffFile.path()}
+         {patch.newFile().path()} ({getPatchTypeString(patch)})
       </div>
    );
 }

@@ -13,7 +13,6 @@ const initialState: MapViewProps = {
 export function mapViewReducer(s: MapViewProps = initialState, action: MapViewAction): MapViewProps {
    switch (action.type) {
       case 'LOAD_COMMITS':
-         console.log('LOAD_COMMITS');
          return {...s, commits: action.commits};
       default:
          return s;

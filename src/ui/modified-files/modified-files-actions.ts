@@ -1,10 +1,10 @@
-import {DiffFile, Oid} from "nodegit";
+import {ConvenientPatch, Oid} from "nodegit";
 
 
 export type ModifiedFilesAction = LoadModifiedFiles
 
 export interface LoadModifiedFiles {
    type: 'LOAD_MODIFIED_FILES';
-   diffFiles: DiffFile[];
+   patches: ConvenientPatch[];
    commitId: Oid;
 }

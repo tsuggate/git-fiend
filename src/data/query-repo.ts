@@ -39,11 +39,11 @@ function logCommit(commit: Commit): void {
 
 export async function loadModifiedFiles(repo: Repository): Promise<ModifiedFilesProps> {
    const commit = await repo.getHeadCommit();
-   const diffFiles = await getChangedFilesForCommit(commit);
+   const patches = await getChangedFilesForCommit(commit);
 
    return {
       commitId: commit.id(),
-      diffFiles
+      patches
    };
 }
 
@@ -51,17 +51,21 @@ export async function loadModifiedFiles(repo: Repository): Promise<ModifiedFiles
 export async function getChangedFilesForCommit(commit: Commit) {
    const diffs: Diff[] = await commit.getDiff(() => {});
 
-   let diffFiles: DiffFile[] = [];
+   // let diffFiles: DiffFile[] = [];
+   let diffPatches: ConvenientPatch[] = [];
 
    for (const d of diffs) {
       const patches: ConvenientPatch[] = await d.patches();
 
-      patches.forEach(p => {
-         const diffFile: DiffFile = p.newFile();
+      diffPatches = [...diffPatches, ...patches];
 
-         diffFiles.push(diffFile);
-      });
+      // patches.forEach((p: ConvenientPatch) => {
+      //
+      //    const diffFile: DiffFile = p.newFile();
+      //
+      //    diffFiles.push(diffFile);
+      // });
    }
 
-   return diffFiles;
+   return diffPatches;
 }
