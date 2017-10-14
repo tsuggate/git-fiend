@@ -1,5 +1,5 @@
 import * as Git from 'nodegit';
-import {Commit, ConvenientPatch, Diff, DiffFile, Repository, Revwalk, TreeEntry} from 'nodegit';
+import {Commit, ConvenientPatch, Diff, DiffFile, Repository, Revwalk} from 'nodegit';
 import * as path from 'path';
 import * as moment from 'moment';
 import {ModifiedFilesProps} from "../ui/modified-files/modified-files-reducer";
