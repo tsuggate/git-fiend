@@ -1,15 +1,16 @@
-import {MapViewState} from "./map-view-data";
 import {MapViewAction} from './map-view-actions';
+import {Commit} from "nodegit";
 
 
-// export type MapViewAction = any;
+export interface MapViewProps {
+   commits: Commit[];
+}
 
-
-const initialState: MapViewState = {
+const initialState: MapViewProps = {
    commits: []
 };
 
-export function mapViewReducer(s: MapViewState = initialState, action: MapViewAction): MapViewState {
+export function mapViewReducer(s: MapViewProps = initialState, action: MapViewAction): MapViewProps {
    switch (action.type) {
       case 'LOAD_COMMITS':
          console.log('LOAD_COMMITS');

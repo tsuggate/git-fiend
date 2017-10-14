@@ -1,6 +1,6 @@
 import {ToolsState} from "../tools/tools-data";
 import {WorkspaceProps} from "../workspace/workspace";
-import {MapViewState} from "../map-view/map-view-data";
+import {MapViewProps} from "../map-view/map-view-reducer";
 
 
 export interface State {
@@ -8,6 +8,7 @@ export interface State {
    workspace: WorkspaceProps;
 }
 
-export interface State2 {
-   mapView: MapViewState;
+
+export interface Store {
+   mapView: MapViewProps;
 }

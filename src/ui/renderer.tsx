@@ -5,13 +5,13 @@ import {combineReducers, createStore} from "redux";
 import {Provider} from "react-redux";
 import {toolsReducer} from "./tools/tools-reducer";
 import App from "./index/app";
-import {State, State2} from "./index/app-reducer";
+import {State, Store} from "./index/app-reducer";
 import {workspaceReducer} from "./workspace/workspace-reducer";
 import {mapViewReducer} from "./map-view/map-view-reducer";
 import {loadCommits} from '../data/query-repo';
 
 
-const indexReducer = combineReducers<State2>({
+const indexReducer = combineReducers<Store>({
    mapView: mapViewReducer
 });
 
