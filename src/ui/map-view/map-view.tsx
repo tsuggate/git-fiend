@@ -6,6 +6,7 @@ import {Commit} from 'nodegit';
 import './map-view.less';
 import * as moment from 'moment';
 import {MapViewProps} from "./map-view-reducer";
+import {getStore} from "../renderer";
 
 
 export class MapView extends React.PureComponent<MapViewProps, {}> {
@@ -25,10 +26,19 @@ function createCommitElement(commit: Commit, key: number) {
    const date = moment(new Date(commit.date())).fromNow();
    const name = (commit.author() as any).name();
 
-   return <div className="commit" key={key}>
-      <div className="message">{commit.message()}</div>
-      <div className="author">{date} by {name}</div>
-   </div>;
+   const onClick = () => {
+      getStore().dispatch({
+         type: 'LOAD_MODIFIED_FILES_COMMIT',
+         commitId: commit.id()
+      });
+   };
+
+   return (
+      <div className="commit" key={key} onClick={onClick}>
+         <div className="message">{commit.message()}</div>
+         <div className="author">{date} by {name}</div>
+      </div>
+   );
 }
 
 const mapStoreToProps = (state: Store): MapViewProps => {

@@ -38,3 +38,7 @@ async function loadInitialState() {
 
    store.dispatch({type: 'LOAD_MODIFIED_FILES', ...modifiedFiles});
 }
+
+export function getStore() {
+   return store;
+}

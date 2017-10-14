@@ -1,11 +1,12 @@
 import * as Git from 'nodegit';
-import {Commit, ConvenientPatch, Diff, DiffFile, Repository, Revwalk} from 'nodegit';
+import {Commit, ConvenientPatch, Diff, Repository, Revwalk} from 'nodegit';
 import * as path from 'path';
 import * as moment from 'moment';
 import {ModifiedFilesProps} from "../ui/modified-files/modified-files-reducer";
 
 
 const pathToRepo = path.resolve(__dirname, '..');
+let repo: Repository | null = null;
 
 export async function printQuery() {
    const repo: Repository = await Git.Repository.open(pathToRepo);
@@ -15,7 +16,12 @@ export async function printQuery() {
 }
 
 export async function openRepo(): Promise<Repository> {
-   return await Git.Repository.open(pathToRepo);
+   repo = await Git.Repository.open(pathToRepo);
+   return repo;
+}
+
+export function getRepo(): Repository | null {
+   return repo;
 }
 
 export async function getCommits(repo: Repository, num: number): Promise<Commit[]> {
@@ -39,7 +45,7 @@ function logCommit(commit: Commit): void {
 
 export async function loadModifiedFiles(repo: Repository): Promise<ModifiedFilesProps> {
    const commit = await repo.getHeadCommit();
-   const patches = await getChangedFilesForCommit(commit);
+   const patches = await getPatchesForCommit(commit);
 
    return {
       commitId: commit.id(),
@@ -47,24 +53,14 @@ export async function loadModifiedFiles(repo: Repository): Promise<ModifiedFiles
    };
 }
 
-// This is just a quick approx. Has issues.
-export async function getChangedFilesForCommit(commit: Commit) {
+export async function getPatchesForCommit(commit: Commit) {
    const diffs: Diff[] = await commit.getDiff(() => {});
-
-   // let diffFiles: DiffFile[] = [];
    let diffPatches: ConvenientPatch[] = [];
 
    for (const d of diffs) {
       const patches: ConvenientPatch[] = await d.patches();
 
       diffPatches = [...diffPatches, ...patches];
-
-      // patches.forEach((p: ConvenientPatch) => {
-      //
-      //    const diffFile: DiffFile = p.newFile();
-      //
-      //    diffFiles.push(diffFile);
-      // });
    }
 
    return diffPatches;
