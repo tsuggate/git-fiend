@@ -3,16 +3,14 @@ import * as React from "react";
 import {SFC} from "react";
 import {MapViewContainer} from "../map-view/map-view";
 import {ModifiedFilesContainer} from "../modified-files/modified-files";
+import {ChangesContainer} from "../changes/changes";
 
 
-interface AppProps {
-
-}
-
-const App: SFC<AppProps> = (props: AppProps) => (
+const App: SFC<{}> = () => (
    <div className="App">
       <MapViewContainer />
       <ModifiedFilesContainer />
+      <ChangesContainer />
    </div>
 );
 

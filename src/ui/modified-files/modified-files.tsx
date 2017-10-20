@@ -5,7 +5,7 @@ import {connect, Dispatch} from "react-redux";
 import {ModifiedFilesAction} from "./modified-files-actions";
 import {ConvenientPatch} from "nodegit";
 import './modified-files.less';
-import {getFileChangesForPatch} from '../../data/query-repo';
+import {dispatch} from "../store/store";
 
 
 export class ModifiedFiles extends React.PureComponent<ModifiedFilesProps, {}> {
@@ -36,8 +36,7 @@ function getPatchTypeString(patch: ConvenientPatch): string {
 }
 
 async function onClickModifiedFile(patch: ConvenientPatch) {
-   const changes = await getFileChangesForPatch(patch);
-   console.log(JSON.stringify(changes, null, 3));
+   dispatch({type: 'REQUEST_CHANGES', patch});
 }
 
 function createModifiedFileElement(patch: ConvenientPatch, key: number) {

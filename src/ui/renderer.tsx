@@ -1,23 +1,21 @@
 import "./root.less";
 import * as React from "react";
 import {render} from "react-dom";
-import {combineReducers, createStore} from "redux";
 import {Provider} from "react-redux";
 import App from "./index/app";
-import {Store} from "./index/app-reducer";
-import {mapViewReducer} from "./map-view/map-view-reducer";
 import {getCommits, loadModifiedFiles, openRepo} from '../data/query-repo';
-import {modifiedFilesReducer} from "./modified-files/modified-files-reducer";
+import {getStore} from "./store/store";
 
 
-const indexReducer = combineReducers<Store>({
-   mapView: mapViewReducer,
-   modifiedFiles: modifiedFilesReducer
-});
+// const indexReducer = combineReducers<Store>({
+//    mapView: mapViewReducer,
+//    modifiedFiles: modifiedFilesReducer,
+//    changes: changesReducer
+// });
+//
+// const store = createStore(indexReducer);
 
-const store = createStore(indexReducer);
-
-
+const store = getStore();
 loadInitialState().catch(e => console.log(e));
 
 render(
@@ -39,6 +37,6 @@ async function loadInitialState() {
    store.dispatch({type: 'LOAD_MODIFIED_FILES', ...modifiedFiles});
 }
 
-export function getStore() {
-   return store;
-}
+// export function getStore() {
+//    return store;
+// }

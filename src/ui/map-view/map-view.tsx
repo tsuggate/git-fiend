@@ -6,7 +6,8 @@ import {Commit} from 'nodegit';
 import './map-view.less';
 import * as moment from 'moment';
 import {MapViewProps} from "./map-view-reducer";
-import {getStore} from "../renderer";
+import {getStore} from "../store/store";
+
 
 
 export class MapView extends React.PureComponent<MapViewProps, {}> {

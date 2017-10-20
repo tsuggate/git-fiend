@@ -1,7 +1,7 @@
 import {ConvenientPatch, Oid} from "nodegit";
 import {ModifiedFilesAction} from "./modified-files-actions";
 import {getPatchesForCommit, getRepo} from "../../data/query-repo";
-import {getStore} from "../renderer";
+import {dispatch} from "../store/store";
 
 
 export interface ModifiedFilesProps {
@@ -34,7 +34,7 @@ async function loadModifiedFilesForCommit(commitId: Oid) {
 
       const patches = await getPatchesForCommit(commit);
 
-      getStore().dispatch({
+      dispatch({
          type: 'LOAD_MODIFIED_FILES',
          commitId,
          patches
