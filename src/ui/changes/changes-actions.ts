@@ -1,5 +1,5 @@
 import {ConvenientPatch} from "nodegit";
-import {ChangesForCommit} from "../../data/query-repo";
+import {ChangesForCommit} from "./changes-reducer";
 
 
 export type ChangesActions = RequestChanges | LoadChanges;

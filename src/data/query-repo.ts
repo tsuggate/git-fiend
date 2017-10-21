@@ -3,6 +3,7 @@ import {Commit, ConvenientPatch, Diff, Repository, Revwalk} from 'nodegit';
 import * as path from 'path';
 import * as moment from 'moment';
 import {ModifiedFilesProps} from "../ui/modified-files/modified-files-reducer";
+import {ChangesForCommit, LineChanges} from "../ui/changes/changes-reducer";
 
 
 const pathToRepo = path.resolve(__dirname, '..');
@@ -28,17 +29,6 @@ export async function openRepo(): Promise<Repository> {
 
 export function getRepo(): Repository | null {
    return repo;
-}
-
-export interface ChangesForCommit {
-   oldFile: string;
-   newFile: string;
-   lines: LineChanges[];
-}
-
-export interface LineChanges {
-   origin: string;
-   content: string;
 }
 
 export async function getFileChangesForCommit(commit: Commit): Promise<ChangesForCommit[]> {

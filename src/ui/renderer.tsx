@@ -7,14 +7,6 @@ import {getCommits, loadModifiedFiles, openRepo} from '../data/query-repo';
 import {getStore} from "./store/store";
 
 
-// const indexReducer = combineReducers<Store>({
-//    mapView: mapViewReducer,
-//    modifiedFiles: modifiedFilesReducer,
-//    changes: changesReducer
-// });
-//
-// const store = createStore(indexReducer);
-
 const store = getStore();
 loadInitialState().catch(e => console.log(e));
 
@@ -24,7 +16,6 @@ render(
    </Provider>,
    document.getElementById('root')
 );
-
 
 async function loadInitialState() {
    const repo = await openRepo();
@@ -36,7 +27,3 @@ async function loadInitialState() {
 
    store.dispatch({type: 'LOAD_MODIFIED_FILES', ...modifiedFiles});
 }
-
-// export function getStore() {
-//    return store;
-// }
