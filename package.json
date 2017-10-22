@@ -28,6 +28,7 @@
   },
   "devDependencies": {
     "@types/commander": "^2.9.0",
+    "@types/electron-devtools-installer": "^2.0.2",
     "@types/escodegen": "0.0.6",
     "@types/esprima": "^2.1.33",
     "@types/fs-extra": "^2.1.0",
@@ -40,6 +41,7 @@
     "css-loader": "^0.28.0",
     "electron": "^1.7.9",
     "electron-builder": "^17.5.0",
+    "electron-devtools-installer": "^2.2.1",
     "electron-window-state": "^4.1.1",
     "extract-text-webpack-plugin": "^2.1.0",
     "fs-extra": "^2.1.2",

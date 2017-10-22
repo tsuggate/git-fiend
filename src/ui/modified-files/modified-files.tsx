@@ -6,15 +6,27 @@ import {ModifiedFilesAction} from "./modified-files-actions";
 import {ConvenientPatch} from "nodegit";
 import './modified-files.less';
 import {dispatch} from "../store/store";
+import {ChangesContainer} from "../changes/changes";
 
 
 export class ModifiedFiles extends React.PureComponent<ModifiedFilesProps, {}> {
    render() {
       const files = this.props.patches.map(createModifiedFileElement);
+      const message = this.props.commit ? this.props.commit.message() : '';
 
       return (
          <div className="ModifiedFiles">
-            {files}
+
+            <div className="CommitInfo">
+               {message}
+            </div>
+
+            <div className="listAndChanges">
+               <div>
+                  {files}
+               </div>
+               <ChangesContainer />
+            </div>
          </div>
       );
    }

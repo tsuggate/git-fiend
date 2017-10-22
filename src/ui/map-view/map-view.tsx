@@ -16,7 +16,7 @@ export class MapView extends React.PureComponent<MapViewProps, {}> {
 
       return (
          <div className="MapView">
-            <h3>History</h3>
+            <div className="title">History</div>
             {commits}
          </div>
       );

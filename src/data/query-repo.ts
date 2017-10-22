@@ -113,7 +113,8 @@ export async function loadModifiedFiles(repo: Repository): Promise<ModifiedFiles
 
    return {
       commitId: commit.id(),
-      patches
+      patches,
+      commit
    };
 }
 

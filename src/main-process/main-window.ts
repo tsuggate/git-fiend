@@ -1,6 +1,7 @@
 import {app, BrowserWindow} from "electron";
 import * as path from "path";
 import {devMode} from "./args";
+import installExtension, {REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS} from 'electron-devtools-installer';
 
 // import * as windowState from "electron-window-state";
 const windowState = require('electron-window-state');
@@ -25,6 +26,14 @@ export function runCreateWindow(): void {
 }
 
 function createWindow(): void {
+   // installExtension(REACT_DEVELOPER_TOOLS)
+   //    .then((name) => console.log(`Added Extension:  ${name}`))
+   //    .catch((err) => console.log('An error occurred: ', err));
+   //
+   // installExtension(REDUX_DEVTOOLS)
+   //    .then((name) => console.log(`Added Extension:  ${name}`))
+   //    .catch((err) => console.log('An error occurred: ', err));
+
    const mainWindowState = windowState({
       defaultWidth: 1200,
       defaultHeight: 800
