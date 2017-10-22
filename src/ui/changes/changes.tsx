@@ -1,9 +1,9 @@
 import * as React from "react";
 import './changes.less';
-import {Store} from "../index/app-reducer";
 import {connect, Dispatch} from "react-redux";
 import {ChangesActions} from "./changes-actions";
 import {ChangesForCommit, ChangesProps} from "./changes-reducer";
+import {StoreState} from "../store/store";
 
 
 export class Changes extends React.PureComponent<ChangesProps, {}> {
@@ -38,7 +38,7 @@ function createChangesForFile(changes: ChangesForCommit, key: number) {
    );
 }
 
-const mapStoreToProps = (state: Store): ChangesProps => {
+const mapStoreToProps = (state: StoreState): ChangesProps => {
    return state.changes;
 };
 

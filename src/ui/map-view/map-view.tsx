@@ -1,12 +1,11 @@
 import * as React from "react";
 import {connect, Dispatch} from "react-redux";
-import {Store} from "../index/app-reducer";
 import {MapViewAction} from './map-view-actions';
 import {Commit} from 'nodegit';
 import './map-view.less';
 import * as moment from 'moment';
 import {MapViewProps} from "./map-view-reducer";
-import {getStore} from "../store/store";
+import {getStore, StoreState} from "../store/store";
 
 
 
@@ -42,7 +41,7 @@ function createCommitElement(commit: Commit, key: number) {
    );
 }
 
-const mapStoreToProps = (state: Store): MapViewProps => {
+const mapStoreToProps = (state: StoreState): MapViewProps => {
    return state.mapView;
 };
 

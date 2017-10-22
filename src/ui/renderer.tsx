@@ -2,7 +2,7 @@ import "./root.less";
 import * as React from "react";
 import {render} from "react-dom";
 import {Provider} from "react-redux";
-import App from "./index/app";
+import App from "./index/index";
 import {getCommits, loadModifiedFiles, openRepo} from '../data/query-repo';
 import {getStore} from "./store/store";
 

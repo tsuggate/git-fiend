@@ -1,4 +1,4 @@
-import "./app.less";
+import "./index.less";
 import * as React from "react";
 import {SFC} from "react";
 import {MapViewContainer} from "../map-view/map-view";

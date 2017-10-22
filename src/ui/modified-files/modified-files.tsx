@@ -1,11 +1,10 @@
 import * as React from "react";
 import {ModifiedFilesProps} from "./modified-files-reducer";
-import {Store} from "../index/app-reducer";
 import {connect, Dispatch} from "react-redux";
 import {ModifiedFilesAction} from "./modified-files-actions";
 import {ConvenientPatch} from "nodegit";
 import './modified-files.less';
-import {dispatch} from "../store/store";
+import {dispatch, StoreState} from "../store/store";
 import {ChangesContainer} from "../changes/changes";
 
 
@@ -59,7 +58,7 @@ function createModifiedFileElement(patch: ConvenientPatch, key: number) {
    );
 }
 
-const mapStoreToProps = (state: Store): ModifiedFilesProps => {
+const mapStoreToProps = (state: StoreState): ModifiedFilesProps => {
    return state.modifiedFiles;
 };
 
