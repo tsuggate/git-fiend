@@ -23,6 +23,8 @@ export function modifiedFilesReducer(s = initialState, action: ModifiedFilesActi
       case 'LOAD_MODIFIED_FILES_COMMIT':
          loadModifiedFilesForCommit(action.commitId).catch(e => console.log(e));
          return s;
+      case 'CLOSE_CHANGES_VIEW':
+         return {...s, commitId: null, commit: null};
       default:
          return s;
    }

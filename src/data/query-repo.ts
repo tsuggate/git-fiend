@@ -97,7 +97,7 @@ export async function getCommits(repo: Repository, num: number): Promise<Commit[
    return await walker.getCommits(num);
 }
 
-function logCommit(commit: Commit): void {
+export function logCommit(commit: Commit): void {
    const author = commit.author() as any;
    const date = moment(new Date(commit.date())).fromNow();
 

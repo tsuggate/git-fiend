@@ -3,7 +3,7 @@ import './changes.less';
 import {connect, Dispatch} from "react-redux";
 import {ChangesActions} from "./changes-actions";
 import {ChangesForCommit, ChangesProps} from "./changes-reducer";
-import {StoreState} from "../store/store";
+import {dispatch, StoreState} from "../store/store";
 
 
 export class Changes extends React.PureComponent<ChangesProps, {}> {
@@ -13,8 +13,13 @@ export class Changes extends React.PureComponent<ChangesProps, {}> {
       return (
          <div className="Changes">
             {changes}
+            <div onClick={this.onClickClose}>X</div>
          </div>
       );
+   }
+
+   onClickClose = () => {
+      dispatch({type: 'CLOSE_CHANGES_VIEW'});
    }
 }
 
