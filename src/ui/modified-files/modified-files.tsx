@@ -1,10 +1,9 @@
 import * as React from "react";
-import {ModifiedFilesProps} from "./modified-files-reducer";
 import {connect, Dispatch} from "react-redux";
 import {ModifiedFilesAction} from "./modified-files-actions";
 import {ConvenientPatch} from "nodegit";
 import './modified-files.less';
-import {dispatch, StoreState} from "../store/store";
+import {dispatch, ModifiedFilesProps, StoreState} from "../store/store";
 
 
 export class ModifiedFiles extends React.PureComponent<ModifiedFilesProps, {}> {
@@ -23,7 +22,6 @@ export class ModifiedFiles extends React.PureComponent<ModifiedFilesProps, {}> {
                <div>
                   {files}
                </div>
-               {/*<ChangesContainer />*/}
             </div>
          </div>
       );

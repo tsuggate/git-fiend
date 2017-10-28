@@ -1,14 +1,8 @@
-import {Commit, ConvenientPatch, Oid} from "nodegit";
+import {Oid} from "nodegit";
 import {ModifiedFilesAction} from "./modified-files-actions";
 import {getPatchesForCommit, getRepo} from "../../data/query-repo";
-import {dispatch} from "../store/store";
+import {dispatch, ModifiedFilesProps} from "../store/store";
 
-
-export interface ModifiedFilesProps {
-   commitId: Oid | null;
-   commit: Commit | null;
-   patches: ConvenientPatch[];
-}
 
 const initialState: ModifiedFilesProps = {
    commitId: null,

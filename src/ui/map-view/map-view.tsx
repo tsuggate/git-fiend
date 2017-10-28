@@ -4,9 +4,7 @@ import {MapViewAction} from './map-view-actions';
 import {Commit} from 'nodegit';
 import './map-view.less';
 import * as moment from 'moment';
-import {MapViewProps} from "./map-view-reducer";
-import {getStore, StoreState} from "../store/store";
-
+import {getStore, MapViewProps, StoreState} from "../store/store";
 
 
 export class MapView extends React.PureComponent<MapViewProps, {}> {

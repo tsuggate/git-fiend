@@ -2,8 +2,8 @@ import * as Git from 'nodegit';
 import {Commit, ConvenientPatch, Diff, Repository, Revwalk} from 'nodegit';
 import * as path from 'path';
 import * as moment from 'moment';
-import {ModifiedFilesProps} from "../ui/modified-files/modified-files-reducer";
 import {ChangesForCommit, LineChanges} from "../ui/changes/changes-reducer";
+import {ModifiedFilesProps} from "../ui/store/store";
 
 
 const pathToRepo = path.resolve(__dirname, '..');
@@ -13,7 +13,6 @@ export async function printQuery() {
    const repo: Repository = await Git.Repository.open(pathToRepo);
 
    const commits = await getCommits(repo, 1);
-   // commits.forEach(logCommit);
 
    for (const commit of commits) {
       const changes = await getFileChangesForCommit(commit);
