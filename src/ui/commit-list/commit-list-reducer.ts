@@ -1,13 +1,13 @@
 import {MapViewAction} from './commit-list-actions';
-import {MapViewProps} from "../store/store";
+import {CommitListProps} from "../store/store";
 
 
-const initialState: MapViewProps = {
+const initialState: CommitListProps = {
    commits: [],
    selectedCommit: null
 };
 
-export function mapViewReducer(s = initialState, action: MapViewAction): MapViewProps {
+export function mapViewReducer(s = initialState, action: MapViewAction): CommitListProps {
    switch (action.type) {
       case 'LOAD_COMMITS':
          return {...s, commits: action.commits};

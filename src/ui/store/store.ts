@@ -5,7 +5,7 @@ import {combineReducers, createStore} from "redux";
 import {Commit, ConvenientPatch, Oid} from "nodegit";
 
 
-export interface MapViewProps {
+export interface CommitListProps {
    commits: Commit[];
    selectedCommit: Commit | null;
 }
@@ -17,7 +17,7 @@ export interface ModifiedFilesProps {
 }
 
 export interface StoreState {
-   mapView: MapViewProps;
+   mapView: CommitListProps;
    modifiedFiles: ModifiedFilesProps;
    changes: ChangesProps;
 }

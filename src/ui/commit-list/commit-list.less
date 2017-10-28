@@ -1,24 +1,32 @@
 
-.MapView {
-
+.CommitList {
+  width: 350px;
 }
 
-.MapView .title {
+.CommitList .title {
   font-size: larger;
 }
 
-.MapView .commit {
+.CommitList .commit {
   display: flex;
   flex-direction: column;
   padding: 8px;
   cursor: default;
 }
 
-.MapView .commit .message {
+.CommitList .commit:hover {
+  background-color: #efefef;
+}
+
+.CommitList .commit.selected {
+  background-color: #dfdfdf;
+}
+
+.CommitList .commit .message {
 
 }
 
-.MapView .commit .author {
+.CommitList .commit .author {
   margin-top: 4px;
   font-size: smaller;
   color: #828282;
