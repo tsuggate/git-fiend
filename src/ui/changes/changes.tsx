@@ -12,8 +12,10 @@ export class Changes extends React.PureComponent<ChangesProps, {}> {
 
       return (
          <div className="Changes">
-            {changes}
-            <div onClick={this.onClickClose}>X</div>
+            <div className="textContainer">
+               {changes}
+               <div onClick={this.onClickClose}>X</div>
+            </div>
          </div>
       );
    }
