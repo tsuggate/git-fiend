@@ -5,6 +5,7 @@ import {Provider} from "react-redux";
 import Index from "./index/index";
 import {getCommits, loadModifiedFiles, openRepo} from '../data/query-repo';
 import {getStore} from "./store/store";
+import {renderMainWindowMenu} from "./global-menu";
 
 
 const store = getStore();
@@ -18,6 +19,8 @@ render(
 );
 
 async function loadInitialState() {
+   renderMainWindowMenu();
+
    const repo = await openRepo();
    const commits = await getCommits(repo, 10);
 

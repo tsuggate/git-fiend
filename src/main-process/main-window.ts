@@ -60,3 +60,5 @@ function createWindow(): void {
 
    mainWindowState.manage(mainWindow);
 }
+
+
