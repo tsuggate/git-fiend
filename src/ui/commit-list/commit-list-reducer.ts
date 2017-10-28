@@ -1,4 +1,4 @@
-import {MapViewAction} from './map-view-actions';
+import {MapViewAction} from './commit-list-actions';
 import {MapViewProps} from "../store/store";
 
 

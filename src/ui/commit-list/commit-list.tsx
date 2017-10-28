@@ -1,13 +1,13 @@
 import * as React from "react";
 import {connect, Dispatch} from "react-redux";
-import {MapViewAction} from './map-view-actions';
+import {MapViewAction} from './commit-list-actions';
 import {Commit} from 'nodegit';
-import './map-view.less';
+import './commit-list.less';
 import * as moment from 'moment';
 import {getStore, MapViewProps, StoreState} from "../store/store";
 
 
-export class MapView extends React.PureComponent<MapViewProps, {}> {
+export class CommitList extends React.PureComponent<MapViewProps, {}> {
    render() {
       const commits = this.props.commits.map(createCommitElement);
 
@@ -47,7 +47,7 @@ const mapDispatchToProps = (dispatch: Dispatch<MapViewAction>, ownProps: {}) => 
 
 });
 
-export const MapViewContainer = connect(
+export const CommitListContainer = connect(
    mapStoreToProps,
    mapDispatchToProps
-)(MapView);
+)(CommitList);

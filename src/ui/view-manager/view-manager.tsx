@@ -2,7 +2,7 @@ import * as React from "react";
 import {StoreState} from "../store/store";
 import {connect} from "react-redux";
 import './view-manager.less';
-import {MapViewContainer} from "../map-view/map-view";
+import {CommitListContainer} from "../commit-list/commit-list";
 import {ModifiedFilesContainer} from "../modified-files/modified-files";
 import {ChangesContainer} from "../changes/changes";
 import {logCommit} from "../../data/query-repo";
@@ -25,7 +25,7 @@ export class ViewManager extends React.PureComponent<StoreState, {}> {
       else {
          return (
             <div className="ViewManager">
-               <MapViewContainer />
+               <CommitListContainer />
                <ModifiedFilesContainer />
             </div>
          );

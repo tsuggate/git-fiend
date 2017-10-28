@@ -1,6 +1,6 @@
 import {ChangesProps, changesReducer} from "../changes/changes-reducer";
 import {modifiedFilesReducer} from "../modified-files/modified-files-reducer";
-import {mapViewReducer} from "../map-view/map-view-reducer";
+import {mapViewReducer} from "../commit-list/commit-list-reducer";
 import {combineReducers, createStore} from "redux";
 import {Commit, ConvenientPatch, Oid} from "nodegit";
 
