@@ -49,15 +49,15 @@ function buildHelpMenu() {
 function buildAppMenuForMac() {
    return {
       label: 'Help',
-      submenu: [{
-         label: 'About',
-         click: aboutDialog
-      }]
+      submenu: [
+         {label: 'About', click: aboutDialog},
+         separator,
+         {role: 'quit'}
+      ]
    }
 }
 
 export function renderMainWindowMenu(): void {
-
    let fileMenuItems: MenuItemOptions[] = [
       {
          label: 'Open Local Repository...',
@@ -65,16 +65,8 @@ export function renderMainWindowMenu(): void {
          accelerator: 'CmdOrCtrl+O',
          enabled: true
       },
-      {
-         label: 'Open Folder...',
-         click: () => {},
-         accelerator: 'CmdOrCtrl+Shift+O',
-         enabled: true
-      },
       separator
    ];
-
-   fileMenuItems.push({role: 'quit'});
 
    const fileMenu = {
       label: 'File',
@@ -93,7 +85,7 @@ export function renderMainWindowMenu(): void {
 
    if (platform() === 'darwin') {
       let menu: MenuItemOptions[] = [
-         buildHelpMenu(),
+         buildAppMenuForMac(),
          fileMenu,
          editMenu,
          buildViewMenu()
@@ -101,11 +93,13 @@ export function renderMainWindowMenu(): void {
       remote.Menu.setApplicationMenu(remote.Menu.buildFromTemplate(menu));
    }
    else {
+      fileMenuItems.push({role: 'quit'});
+
       let menu: MenuItemOptions[] = [
-         buildHelpMenu(),
          fileMenu,
          editMenu,
-         buildViewMenu()
+         buildViewMenu(),
+         buildHelpMenu()
       ];
       getWindow().setMenu(remote.Menu.buildFromTemplate(menu));
    }
