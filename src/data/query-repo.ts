@@ -111,9 +111,9 @@ export async function loadModifiedFiles(repo: Repository): Promise<ModifiedFiles
    const patches = await getPatchesForCommit(commit);
 
    return {
-      commitId: commit.id(),
       patches,
-      commit
+      commit,
+      selectedPatch: null
    };
 }
 

@@ -25,7 +25,7 @@ const initialState: ChangesProps = {
 
 export function changesReducer(s = initialState, action: ChangesActions): ChangesProps {
    switch (action.type) {
-      case 'REQUEST_CHANGES':
+      case 'SELECT_PATCH':
          loadChangesForPatch(action.patch).catch(e => console.log(e));
          return s;
       case 'LOAD_CHANGES':

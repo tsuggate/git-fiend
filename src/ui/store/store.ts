@@ -11,9 +11,9 @@ export interface CommitListProps {
 }
 
 export interface ModifiedFilesProps {
-   commitId: Oid | null;
    commit: Commit | null;
    patches: ConvenientPatch[];
+   selectedPatch: ConvenientPatch | null;
 }
 
 export interface StoreState {

@@ -8,7 +8,7 @@ import {dispatch, ModifiedFilesProps, StoreState} from "../store/store";
 
 export class ModifiedFiles extends React.PureComponent<ModifiedFilesProps, {}> {
    render() {
-      const files = this.props.patches.map(createModifiedFileElement);
+      const files = this.props.patches.map(this.createModifiedFileElement);
       const message = this.props.commit ? this.props.commit.message() : '';
 
       return (
@@ -26,6 +26,21 @@ export class ModifiedFiles extends React.PureComponent<ModifiedFilesProps, {}> {
          </div>
       );
    }
+
+   createModifiedFileElement = (patch: ConvenientPatch, key: number) => {
+      let classes = 'diffFile';
+
+      console.log(this.props.selectedPatch === patch);
+      if (this.props.selectedPatch === patch) {
+         classes += ' selected';
+      }
+
+      return (
+         <div className={classes} key={key} onClick={async () => {await onClickModifiedFile(patch)}}>
+            {patch.newFile().path()} ({getPatchTypeString(patch)})
+         </div>
+      );
+   };
 }
 
 function getPatchTypeString(patch: ConvenientPatch): string {
@@ -44,16 +59,16 @@ function getPatchTypeString(patch: ConvenientPatch): string {
 }
 
 async function onClickModifiedFile(patch: ConvenientPatch) {
-   dispatch({type: 'REQUEST_CHANGES', patch});
+   dispatch({type: 'SELECT_PATCH', patch});
 }
 
-function createModifiedFileElement(patch: ConvenientPatch, key: number) {
-   return (
-      <div className="diffFile" key={key} onClick={async () => {await onClickModifiedFile(patch)}}>
-         {patch.newFile().path()} ({getPatchTypeString(patch)})
-      </div>
-   );
-}
+// function createModifiedFileElement(patch: ConvenientPatch, key: number) {
+//    return (
+//       <div className="diffFile" key={key} onClick={async () => {await onClickModifiedFile(patch)}}>
+//          {patch.newFile().path()} ({getPatchTypeString(patch)})
+//       </div>
+//    );
+// }
 
 const mapStoreToProps = (state: StoreState): ModifiedFilesProps => {
    return state.modifiedFiles;

@@ -5,9 +5,9 @@ import {dispatch, ModifiedFilesProps} from "../store/store";
 
 
 const initialState: ModifiedFilesProps = {
-   commitId: null,
    commit: null,
-   patches: []
+   patches: [],
+   selectedPatch: null
 };
 
 export function modifiedFilesReducer(s = initialState, action: ModifiedFilesAction): ModifiedFilesProps {
@@ -17,6 +17,8 @@ export function modifiedFilesReducer(s = initialState, action: ModifiedFilesActi
       case 'SELECT_COMMIT':
          loadModifiedFilesForCommit(action.commit).catch(e => console.log(e));
          return s;
+      case 'SELECT_PATCH':
+         return {...s, selectedPatch: action.patch};
       case 'CLOSE_CHANGES_VIEW':
          return {...s, commitId: null, commit: null};
       default:
@@ -33,7 +35,6 @@ async function loadModifiedFilesForCommit(commit: Commit) {
       dispatch({
          type: 'LOAD_MODIFIED_FILES',
          commit,
-         commitId: commit.id(),
          patches
       });
    }

@@ -24,18 +24,9 @@ export class CommitList extends React.PureComponent<CommitListProps, {}> {
       const name = (commit.author() as any).name();
       let classes = 'commit';
 
-      // console.log(commit.id().tostrS(), this.props.selectedCommit ? this.props.selectedCommit.id().tostrS() : 'null');
-
       if (this.props.selectedCommit && this.props.selectedCommit.id().equal(commit.id())) {
          classes += ' selected';
       }
-
-      // const onClick = () => {
-      //    getStore().dispatch({
-      //       type: 'SELECT_COMMIT',
-      //       commit
-      //    });
-      // };
 
       return (
          <div className={classes} key={key} onClick={() => {this.selectCommit(commit)}}>
@@ -52,27 +43,6 @@ export class CommitList extends React.PureComponent<CommitListProps, {}> {
       });
    };
 }
-
-// function createCommitElement(commit: Commit, key: number) {
-//    const date = moment(new Date(commit.date())).fromNow();
-//    const name = (commit.author() as any).name();
-//    let classes = 'commit';
-//
-//
-//    const onClick = () => {
-//       getStore().dispatch({
-//          type: 'SELECT_COMMIT',
-//          commit
-//       });
-//    };
-//
-//    return (
-//       <div className={classes} key={key} onClick={onClick}>
-//          <div className="message">{commit.message()}</div>
-//          <div className="author">{date} by {name}</div>
-//       </div>
-//    );
-// }
 
 const mapStoreToProps = (state: StoreState): CommitListProps => {
    return state.mapView;
