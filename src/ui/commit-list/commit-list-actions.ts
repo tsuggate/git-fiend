@@ -1,7 +1,7 @@
 import {Commit} from 'nodegit';
 
 
-export type MapViewAction = LoadCommits | SelectCommit;
+export type CommitListAction = LoadCommits | SelectCommit;
 
 export interface LoadCommits {
    type: 'LOAD_COMMITS';

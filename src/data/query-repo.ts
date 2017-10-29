@@ -4,13 +4,13 @@ import * as path from 'path';
 import * as moment from 'moment';
 import {ChangesForCommit, LineChanges} from "../ui/changes/changes-reducer";
 import {ModifiedFilesProps} from "../ui/store/store";
+import {pathToThisRepo} from "../ui/constants";
 
 
-const pathToRepo = path.resolve(__dirname, '..');
 let repo: Repository | null = null;
 
 export async function printQuery() {
-   const repo: Repository = await Git.Repository.open(pathToRepo);
+   const repo: Repository = await Git.Repository.open(pathToThisRepo);
 
    const commits = await getCommits(repo, 1);
 
@@ -21,8 +21,8 @@ export async function printQuery() {
    }
 }
 
-export async function openRepo(): Promise<Repository> {
-   repo = await Git.Repository.open(pathToRepo);
+export async function openRepo(repoPath: string): Promise<Repository> {
+   repo = await Git.Repository.open(repoPath);
    return repo;
 }
 

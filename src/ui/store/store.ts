@@ -1,6 +1,6 @@
 import {ChangesProps, changesReducer} from "../changes/changes-reducer";
 import {modifiedFilesReducer} from "../modified-files/modified-files-reducer";
-import {mapViewReducer} from "../commit-list/commit-list-reducer";
+import {commitListReducer} from "../commit-list/commit-list-reducer";
 import {combineReducers, createStore} from "redux";
 import {Commit, ConvenientPatch, Oid} from "nodegit";
 
@@ -17,18 +17,25 @@ export interface ModifiedFilesProps {
 }
 
 export interface StoreState {
-   mapView: CommitListProps;
+   commitList: CommitListProps;
    modifiedFiles: ModifiedFilesProps;
    changes: ChangesProps;
 }
 
 const indexReducer = combineReducers<StoreState>({
-   mapView: mapViewReducer,
+   commitList: commitListReducer,
    modifiedFiles: modifiedFilesReducer,
    changes: changesReducer
 });
 
-const store = createStore(indexReducer);
+const store = createStore(
+   indexReducer,
+   // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
+
+store.subscribe(() => {
+   console.log(store.getState());
+});
 
 export function getStore() {
    return store;

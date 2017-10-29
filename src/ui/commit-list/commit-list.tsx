@@ -1,6 +1,6 @@
 import * as React from "react";
 import {connect, Dispatch} from "react-redux";
-import {MapViewAction} from './commit-list-actions';
+import {CommitListAction} from './commit-list-actions';
 import {Commit} from 'nodegit';
 import './commit-list.less';
 import * as moment from 'moment';
@@ -45,10 +45,10 @@ export class CommitList extends React.PureComponent<CommitListProps, {}> {
 }
 
 const mapStoreToProps = (state: StoreState): CommitListProps => {
-   return state.mapView;
+   return state.commitList;
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<MapViewAction>, ownProps: {}) => ({
+const mapDispatchToProps = (dispatch: Dispatch<CommitListAction>, ownProps: {}) => ({
 
 });
 

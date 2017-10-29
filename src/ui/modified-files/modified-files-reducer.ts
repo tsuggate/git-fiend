@@ -28,8 +28,9 @@ export function modifiedFilesReducer(s = initialState, action: ModifiedFilesActi
 
 async function loadModifiedFilesForCommit(commit: Commit) {
    const repo = getRepo();
-
+   console.log(repo);
    if (repo) {
+      console.log('loadModifiedFilesForCommit');
       const patches = await getPatchesForCommit(commit);
 
       dispatch({

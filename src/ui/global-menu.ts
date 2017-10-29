@@ -1,6 +1,7 @@
 import {remote} from 'electron';
 import {platform} from "os";
-const packageJson = require('../../package.json');
+import {clickOpenRepo, showAboutDialog} from "./global-menu/menu-actions";
+
 
 type MenuItemOptions = Electron.MenuItemConstructorOptions;
 
@@ -8,19 +9,6 @@ type MenuItemOptions = Electron.MenuItemConstructorOptions;
 const separator: MenuItemOptions = {
    type: 'separator'
 };
-
-export function aboutDialog() {
-   remote.dialog.showMessageBox(getWindow(), {
-      type: 'info',
-      title: packageJson.name,
-      message: packageJson.name,
-      detail: `Version ${packageJson.version}`//\nLatest ${latestVersion}`
-   });
-}
-
-export function getWindow(): Electron.BrowserWindow {
-   return remote.getCurrentWindow();
-}
 
 function buildViewMenu() {
    return {
@@ -41,7 +29,7 @@ function buildHelpMenu() {
       label: 'Help',
       submenu: [{
          label: 'About',
-         click: aboutDialog
+         click: showAboutDialog
       }]
    }
 }
@@ -50,7 +38,7 @@ function buildAppMenuForMac() {
    return {
       label: 'Help',
       submenu: [
-         {label: 'About', click: aboutDialog},
+         {label: 'About', click: showAboutDialog},
          separator,
          {role: 'quit'}
       ]
@@ -61,7 +49,7 @@ export function renderMainWindowMenu(): void {
    let fileMenuItems: MenuItemOptions[] = [
       {
          label: 'Open Local Repository...',
-         click: () => {},
+         click: clickOpenRepo,
          accelerator: 'CmdOrCtrl+O',
          enabled: true
       },
@@ -103,4 +91,8 @@ export function renderMainWindowMenu(): void {
       ];
       getWindow().setMenu(remote.Menu.buildFromTemplate(menu));
    }
+}
+
+export function getWindow(): Electron.BrowserWindow {
+   return remote.getCurrentWindow();
 }
